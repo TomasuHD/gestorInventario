@@ -11,7 +11,12 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username', 'email', 'password1',  'password2']
 
 class ItemInventarioForm(forms.ModelForm):
-    category = forms.ModelChoiceField(queryset=Category.objects.all(), initial=0)
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), initial=0, label='Categoría')
+
     class Meta:
         model = ItemInventario
         fields = ['name', 'quantity', 'category']
+        labels = {
+            'name': 'Nombre',
+            'quantity': 'Cantidad',
+        }
