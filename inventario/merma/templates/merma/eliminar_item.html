@@ -1,0 +1,18 @@
+{% extends 'merma/base.html' %}
+
+{% block content %}
+<div>
+    <a href="{% url 'panel' %}" class="btn btn-outline-primary my-3 mx-4">Regresar</a>
+    <div class="row">
+        <form method="post" class="col-sm-11 col-md-5 mx-auto mt-5">
+            {% csrf_token %}
+            <h1 class="fw-light">Esta seguro que desea eliminar {{ item.name }} de la lista?</h1>
+            <p class="fw-light">Este cambio no se puede deshacer.</p>
+
+            <div>
+                <button class="btn btn-danger">Si, eliminar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
