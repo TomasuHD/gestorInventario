@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-cq_@uxl9!14%ie+csn6bmce71sz-f)4_qrf8m)hfh32o6a(h-5'
 DEBUG = True
-ALLOWED_HOSTS = ['tomi0806.pythonanywhere.com']
+ALLOWED_HOSTS = ['tomi0806.pythonanywhere.com','localhost']
 
 INSTALLED_APPS = [
     'merma',
