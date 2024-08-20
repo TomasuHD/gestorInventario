@@ -83,34 +83,29 @@ class DeleteItem(LoginRequiredMixin, DeleteView):
     context_object_name = 'item'
 
 def GenerarReporte(request):
-    # Obtener la fecha actual y formatearla
     fecha_actual = datetime.now()
     fecha_formateada = fecha_actual.strftime("%d%b%y").upper()
-
-    # Crear el nombre del archivo con la fecha formateada
     filename = f"reporteInventario_{fecha_formateada}.pdf"
-
-    # Crear un objeto HttpResponse con el contenido PDF
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
-
     p = canvas.Canvas(response, pagesize=letter)
     p.setFont("Helvetica", 12)
-
     p.drawString(200, 750, "Reporte de Inventario")
-
     p.drawString(50, 700, "ID")
     p.drawString(100, 700, "Nombre")
-    p.drawString(300, 700, "Cantidad")
-    p.drawString(400, 700, "Categoría")
-
+    p.drawString(250, 700, "Cantidad")
+    p.drawString(350, 700, "Categoría")
+    p.drawString(450, 700, "Proveedor")
+    p.drawString(550, 700, "Fecha de Entrada")
     items = ItemInventario.objects.filter(user=request.user)
     y = 680
     for item in items:
         p.drawString(50, y, str(item.id))
         p.drawString(100, y, item.name)
-        p.drawString(300, y, str(item.quantity))
-        p.drawString(400, y, item.category.name)
+        p.drawString(250, y, str(item.quantity))
+        p.drawString(350, y, item.category.name)
+        p.drawString(450, y, item.provider)
+        p.drawString(550, y, item.entry_date.strftime("%d/%m/%Y"))
         y -= 20
 
     p.showPage()
